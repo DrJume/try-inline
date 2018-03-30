@@ -1,0 +1,15 @@
+{
+  "name": "try-inline",
+  "version": "1.0.0",
+  "engines": {
+    "node": "8.x.x"
+  },
+  "repository": "github:user/repo",
+  "description": "A wrapper function to catch errors inline for async promises and syncronous functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DrJume",
+  "license": "MIT"
+}
