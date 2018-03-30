@@ -4,8 +4,8 @@
   "engines": {
     "node": "8.x.x"
   },
-  "repository": "github:user/repo",
-  "description": "A wrapper function to catch errors inline for async promises and syncronous functions",
+  "repository": "github:DrJume/try-inline",
+  "description": "A functional approach to catching errors inline for async promises and syncronous functions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
