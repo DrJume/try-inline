@@ -1,6 +1,8 @@
 # :traffic_light: TryInline
 > A functional approach to catching errors inline for async promises and syncronous functions
 
+[![NPM Version][npm-image]][npm-url]
+
 :bulb: _Inspired by [await-to-js](https://github.com/scopsy/await-to-js)_
 
 ## :gift: Example
@@ -98,3 +100,6 @@ When you want to be `100% safe`, then put a semi-colon in front of the destructu
 
 ## :page_with_curl: License
 [MIT](https://github.com/DrJume/try-inline/blob/master/LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/try-inline.svg
+[npm-url]: https://www.npmjs.com/package/try-inline
