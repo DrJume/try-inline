@@ -1,8 +1,8 @@
 {
   "name": "try-inline",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "engines": {
-    "node": "8.x.x"
+    "node": ">=8"
   },
   "repository": "github:DrJume/try-inline",
   "description": "A functional approach to catching errors inline for async promises and syncronous functions",

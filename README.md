@@ -29,18 +29,25 @@ $ npm install try-inline
   - Inline error catching
     - No more "trying-hell" (like callback-hell)
   - Configurable error logging
+  - Error patching
+    - on a execution fail, the returned error object includes its _ErrorString_
   - Labeling executions for better debugging
+  - Filtering error results for specified key-paths
+    - only show specific keys from the error object
 
 ## :nut_and_bolt: API
 
 ### `try_(executionObj, [options]) => [err, data]`
 
 Wraps an execution safely. The default TryInline instance. 
-- `executionObj` - the object to execute. Can be a promise or a callback with a syncronous function.
-- `options` - and optional object where:
-  - `level` - method used from logger. The default logger is the JavaScript global "console". So the available values are: _`info, log, warn, error`_. **Defaults** to `error`. When you want to use your own logger, take a look at creating your own TryInline custom instance.
-  - `label` - optional label attached to the error log message. 
-  - `errData` - additional error information (assinged to `error._data`).
+- `executionObj` - the object to execute. Can be a **promise** or a **callback with a syncronous function**.
+- `logOptionsString` - *optional* (you can leave it empty) option string for the logger.
+  - Format: `"(logLevel:)labelString"`
+    - `logLevel` - method used from logger. The default logger is the JavaScript global "console". So the available values are: _`info, log, warn, error`_. **Defaults** to `error`. When you want to use your own logger, take a look at creating your own TryInline custom instance.
+    - `labelString` - optional label attached to the error log message. 
+  - Example: `"warn:HTTP_TIMEOUT"` -> Logger gets the '*warn*' log-level and the label string '*HTTP_TIMEOUT*'
+- `options` - optional object with:
+  - `errData` - additional error information (assinged to `error.ErrorData`).
 
 **Returns** an array with two values:
 - `err` - the error obejct. When `executionObj` throws an error, it is assigned to `err`. Otherwise `err` is **null**.
@@ -63,20 +70,20 @@ let [, data] = ... // only get the data obj
 
 Creates a custom TryInline instance with specified options.
 - `options` - required object where:
-  - `logErrorFunc` - custom error handling function. It gets _`err, level, label`_ passed as arguments.
-  - `defaultLogLevel` - set the default level for your error handling function.
+  - `Logger` - custom error handling function. It gets _`error, level, label`_ passed as arguments.
+  - `DefaultLogLevel` - set the default level for your Logger.
 
-**Returns** a custom *`try_`* instance with attached `logErrorFunc`.
+**Returns** a custom *`try_`* instance with attached `Logger`.
 
 ```js
 const TryInline = require('try-inline');
 
 const try_ = new TryInline({
-  logErrorFunc: function(err, level, label) {
-    const content = label ? `(${label}) ${err}` : err;
-    Logger[level](content);
+  Logger: function(error, level, label) {
+    const logMessage = label ? `(${label}) ${error}` : error;
+    console[level](logMessage);
   },
-  defaultLogLevel: 'err'
+  DefaultLogLevel: 'debug'
 });
 ```
 

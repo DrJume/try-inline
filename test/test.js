@@ -9,8 +9,8 @@ process.on('unhandledRejection', (arg) => {
   function somePromise(arg) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (arg == 'err') {
-          reject(new Error('bläblä'))
+        if (arg === 'err') {
+          reject(new Error('ERRORSTRING'))
         }
         resolve(arg)
       }, 1000)
@@ -18,8 +18,8 @@ process.on('unhandledRejection', (arg) => {
   }
 
   function someFunction(arg) {
-    if (arg == 'err') {
-      throw new Error('bläbläsync')
+    if (arg === 'err') {
+      throw new Error('ERRORSTRING')
     }
     return arg
   }
@@ -27,23 +27,23 @@ process.on('unhandledRejection', (arg) => {
   let err, data
 
   // async
-  [err, data] = await try_(somePromise('123'), { level: 'warn', label: 'SOME_PROMISE', errData: 'errDataPromise' });
+  [err, data] = await try_(somePromise('err'), 'warn:SOME_PROMISE', { errData: 'errDataPromise' });
   // if (err) process.exit(1);
   console.log(data);
 
   // normal function
-  [err, data] = try_(() => someFunction('456'), { level: 'info', label: 'SOME_FUNC', errData: 'errDataSyncr' });
+  [err, data] = try_(() => someFunction('err'), 'info:SOME_FUNC', { errData: 'errDataSyncr' });
   // if (err) process.exit(1);
   console.log(data);
 
   const myTry_ = new TryInline({
-    logErrorFunc(err, level, label) {
-      console.log({ err, level, label })
+    Logger(error, level, label) {
+      console.log(JSON.stringify({ error, level, label }, null, 2))
     },
-    defaultLogLevel: 'debug'
+    DefaultLogLevel: 'debug'
   });
-  
-  [err, data] = await myTry_(somePromise('45645'), { label: 'SOME_PROMISE', errData: 'errDataPromise' });
+
+  [err, data] = await myTry_(somePromise('err'), '', { errData: 'errDataPromise' });
   console.log(data);
 
 })()
