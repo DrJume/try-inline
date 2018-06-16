@@ -39,7 +39,7 @@ $ npm install try-inline
 
 ## :nut_and_bolt: API
 
-### `try_(executionObj, [options]) => [err, data]`
+### `try_(executionObj, logOptionsString, [options]) => [err, data]`
 
 Wraps an execution safely. The default TryInline instance. 
 - `executionObj` - the object to execute. Can be a **promise** or a **callback with a syncronous function**.
@@ -58,9 +58,8 @@ Wraps an execution safely. The default TryInline instance.
 ```js
 const { try_ } = require('try-inline');
 
-let [err, data] = await try_(readFilePromise('lorem.txt'), 
-  { level: 'warn', label: 'READ_FILE_ERR', 
-    errData: "Safely ignore the error. The lorem file is optional." } 
+let [err, data] = await try_(readFilePromise('lorem.txt'), 'warn:READ_FILE_ERR',
+    { errData: "Safely ignore the error. The lorem file is optional." } 
 });
 
 // array destructuring is awesome!
