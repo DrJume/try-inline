@@ -29,9 +29,9 @@ $ npm install try-inline
 
 ## :barber: Features
   - Inline error catching
-    - No more "trying-hell" (like callback-hell)
+    - No more "try-catch-hell" (like callback-hell)
   - Configurable error logging
-  - Error patching
+  - Error object patching
     - on a execution fail, the returned error object includes its _ErrorString_
   - Labeling executions for better debugging
   - Filtering error results for specified key-paths
