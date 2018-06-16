@@ -25,7 +25,6 @@ function handleError(error, logLvl, labelString, errData, Logger) {
 
   const [label, ...allowedKeys] = labelString.split('#')
   if (allowedKeys.length > 0) {
-    log.debug('ALLOWED_ERR_FILTER_KEYS', allowedKeys)
     error = filterObj(error, allowedKeys)
   }
 
