@@ -1,5 +1,5 @@
 # :traffic_light: TryInline
-> A functional approach to catching errors inline for async promises and syncronous functions
+> An easy inline error handling wrapper for async promises and syncronous functions 
 
 [![NPM Version][npm-image]][npm-url]
 
@@ -29,12 +29,12 @@ $ npm install try-inline
 
 ## :barber: Features
   - Inline error catching
-    - No more "try-catch-hell" (like callback-hell)
   - Configurable error logging
   - Error object patching
     - on a execution fail, the returned error object includes its _ErrorString_
   - Labeling executions for better debugging
   - Filtering error results for specified key-paths
+  (documentation coming soon)
     - only show specific keys from the error object
 
 ## :nut_and_bolt: API
